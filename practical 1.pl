@@ -1,0 +1,68 @@
+/* ---- FACTS ---- */
+
+% gender
+male(john).
+male(peter).
+male(rahul).
+male(aman).
+
+female(sita).
+female(linda).
+female(neha).
+female(rita).
+
+% parent(child, parent)
+parent(peter, john).
+parent(linda, john).
+parent(rahul, peter).
+parent(neha, peter).
+parent(aman, linda).
+parent(rita, sita).
+
+/* ---- RELATIONSHIP RULES ---- */
+
+% father: F is father of C
+father(F, C) :-
+    male(F),
+    parent(C, F).
+
+% mother: M is mother of C
+mother(M, C) :-
+    female(M),
+    parent(C, M).
+
+% sibling: X and Y share a parent (and are not the same person)
+sibling(X, Y) :-
+    parent(X, P),
+    parent(Y, P),
+    X \= Y.
+
+% brother: B is brother of X
+brother(B, X) :-
+    sibling(B, X),
+    male(B).
+
+% sister: S is sister of X
+sister(S, X) :-
+    sibling(S, X),
+    female(S).
+
+% grandfather: GF is grandfather of C
+grandfather(GF, C) :-
+    father(GF, P),
+    parent(C, P).
+
+% grandmother: GM is grandmother of C
+grandmother(GM, C) :-
+    mother(GM, P),
+    parent(C, P).
+
+% uncle: U is uncle of C
+uncle(U, C) :-
+    brother(U, P),
+    parent(C, P).
+
+% aunt: A is aunt of C
+aunt(A, C) :-
+    sister(A, P),
+    parent(C, P).
