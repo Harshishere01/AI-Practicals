@@ -1,3 +1,5 @@
+Write a PROLOG program to implement the family tree and demonstrate the family relationship
+
 /* ---- FACTS ---- */
 
 % gender
@@ -66,3 +68,4 @@ uncle(U, C) :-
 aunt(A, C) :-
     sister(A, P),
     parent(C, P).
+
